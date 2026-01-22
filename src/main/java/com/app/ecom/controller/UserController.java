@@ -1,18 +1,19 @@
-package com.app.ecom;
+package com.app.ecom.controller;
 
 
+import com.app.ecom.dto.UserRequest;
+import com.app.ecom.dto.UserResponse;
+import com.app.ecom.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-//@RequestMapping("/api/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     //    @Autowired
@@ -22,9 +23,9 @@ public class UserController {
 //        this.userService = userService;
 //    }
 
-    @GetMapping("/api/users")
+    @GetMapping
 //    @RequestMapping(value = "/api/users", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<UserResponse>> getAllUsers() {
 
         return new ResponseEntity<>(userService.fetchAllUsers(),
                 HttpStatus.OK);
@@ -32,8 +33,8 @@ public class UserController {
 //        return ResponseEntity.ok(userService.fetchAllUsers());
     }
 
-    @GetMapping("/api/users/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
 
 //        User user = userService.fetchUser(id);
 //        if(user == null) {
@@ -44,9 +45,9 @@ public class UserController {
         return userService.fetchUser(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/api/users")
-    public ResponseEntity<String> createUsers(@RequestBody User user) {
-        userService.addUser(user);
+    @PostMapping
+    public ResponseEntity<String> createUsers(@RequestBody UserRequest userRequest) {
+        userService.addUser(userRequest);
         return ResponseEntity.ok("User added Successfully.");
     }
 
@@ -61,10 +62,10 @@ public class UserController {
 //    }
 
 
-    @PutMapping("/api/users/{id}")
-    public ResponseEntity<String> updateUserById(@PathVariable Long id, @RequestBody User updatedUser) {
+    @PutMapping("{id}")
+    public ResponseEntity<String> updateUserById(@PathVariable Long id, @RequestBody UserRequest updatedUserRequest) {
 
-        boolean updated = userService.updateUser(id, updatedUser);
+        boolean updated = userService.updateUser(id, updatedUserRequest);
         if (updated)
             return ResponseEntity.ok("User updated successfully.");
         return ResponseEntity.notFound().build();
