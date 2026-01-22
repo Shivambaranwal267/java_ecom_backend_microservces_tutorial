@@ -1,7 +1,7 @@
 package com.app.ecom;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-<<<<<<< HEAD
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,14 +30,6 @@ public class User {
 //        this.firstName = firstName;
 //        this.lastName = lastName;
 //    }
-=======
-import lombok.Data;
 
-@Data
-@JsonPropertyOrder({"id", "firstName", "lastName"})
-public class User {
-    private Long id;
-    private String firstName;
-    private String lastName;
->>>>>>> ebccb94d14e0982c92e9caf5414d341d52fbce17
+
 }
