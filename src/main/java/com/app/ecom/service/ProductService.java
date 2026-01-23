@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -77,5 +76,11 @@ public class ProductService {
 //                .orElseThrow(() -> new RuntimeException("Product not found"));
 //        product.setActive(false);
 //        productRepository.save(product);
+    }
+
+    public List<ProductResponse> searchProducts(String keyword) {
+        return productRepository.searchProducts(keyword).stream()
+                .map(this::mapToProductResponse)
+                .collect(Collectors.toList());
     }
 }
