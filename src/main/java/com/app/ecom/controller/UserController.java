@@ -48,7 +48,8 @@ public class UserController {
     @PostMapping
     public ResponseEntity<String> createUsers(@RequestBody UserRequest userRequest) {
         userService.addUser(userRequest);
-        return ResponseEntity.ok("User added Successfully.");
+//        return ResponseEntity.ok("User added Successfully.");
+        return ResponseEntity.status(HttpStatus.CREATED).body("User added Successfully");
     }
 
 //    @PutMapping("/api/users/{id}")
