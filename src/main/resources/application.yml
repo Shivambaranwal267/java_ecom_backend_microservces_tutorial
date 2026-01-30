@@ -3,6 +3,8 @@
 #spring.datasource.url=jdbc:h2:mem:test
 # spring.jpa.show-sql=true
 # spring.jpa.hibernate.ddl-auto=create
+# management.endpoints.web.exposure.include=*
+# management.endpoints.health.show-details=always
 
 spring:
   application:
@@ -20,4 +22,27 @@ spring:
     hibernate:
       ddl-auto: create
 
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+server:
+  shutdown: graceful
+
+info:
+  app:
+    name: MyNewApp
+    description: App build by us
+    version: 1.0.0
 
